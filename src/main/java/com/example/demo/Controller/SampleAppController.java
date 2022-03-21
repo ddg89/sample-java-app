@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.entities.Articoli;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class SampleAppController {
 
     @PostMapping(value = "/createArticolo", produces = "application/json")
-    public void createArticolo(@RequestBody Object articolo){
+    public void createArticolo(@RequestBody Articoli articolo){
 
     }
 
@@ -17,7 +18,7 @@ public class SampleAppController {
     }
 
     @PutMapping(value = "/updateArticolo", produces = "application/json")
-    public void updateArticolo(@RequestBody Object articolo){
+    public void updateArticolo(@RequestBody Articoli articolo){
 
     }
 
