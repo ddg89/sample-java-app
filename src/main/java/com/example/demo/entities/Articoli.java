@@ -1,12 +1,10 @@
 package com.example.demo.entities;
 
 import com.sun.istack.NotNull;
-import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +12,7 @@ import java.util.Date;
 @Entity @Table(name = "articoli")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Campi {
+public class Articoli {
 
     @Getter @Setter
     @NotNull @Id
