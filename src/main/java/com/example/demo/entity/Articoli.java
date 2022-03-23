@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.entity;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;

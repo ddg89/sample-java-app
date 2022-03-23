@@ -1,6 +1,6 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
-import com.example.demo.entities.Articoli;
+import com.example.demo.entity.Articoli;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
