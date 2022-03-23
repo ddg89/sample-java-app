@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Articoli;
+import com.example.demo.exception.BindingException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.service.ArticoliService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +17,8 @@ public class SampleAppController {
 
     @PostMapping(value = "/createArticolo", produces = "application/json")
     public void createArticolo(@RequestBody Articoli articolo){
+        //if (binding.hasErrors())
+          //  throw new BindingException();
         service.createArticolo(articolo);
     }
 
