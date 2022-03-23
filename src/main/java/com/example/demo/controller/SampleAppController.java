@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/SampleApp")
 public class SampleAppController {
@@ -16,9 +18,9 @@ public class SampleAppController {
     ArticoliService service;
 
     @PostMapping(value = "/createArticolo", produces = "application/json")
-    public void createArticolo(@RequestBody Articoli articolo){
-        //if (binding.hasErrors())
-          //  throw new BindingException();
+    public void createArticolo(@Valid @RequestBody Articoli articolo, BindingResult binding){
+        if (binding.hasErrors())
+            throw new BindingException();
         service.createArticolo(articolo);
     }
 
