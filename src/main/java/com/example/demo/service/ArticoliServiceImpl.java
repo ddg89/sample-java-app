@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 
 import com.example.demo.entity.Articoli;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.repository.ArticoliRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,23 +23,30 @@ public class ArticoliServiceImpl implements ArticoliService{
     public void createArticolo(Articoli articolo) {
         repository.save(articolo);
     }
+
     @Transactional
     @Override
-    public void deleteArticolo(String codiceArticolo) {
+    public void deleteArticolo(String codiceArticolo) throws NotFoundException {
+        Optional<Articoli> art = repository.findById(codiceArticolo);
+        if (art.isEmpty())
+            throw new NotFoundException();
+
         repository.deleteById(codiceArticolo);
     }
 
     @Transactional
     @Override
-    public void updateArticolo(Articoli articolo) {
+    public void updateArticolo(Articoli articolo) throws NotFoundException{
+        if (!repository.existsById(articolo.getCodart()))
+            throw new NotFoundException();
         repository.save(articolo);
     }
 
     @Override
-    public Articoli getArticolo(String codiceArticolo) {
+    public Articoli getArticolo(String codiceArticolo) throws NotFoundException {
         Optional<Articoli> res = repository.findById(codiceArticolo);
-        if(!res.isEmpty())
-            return res.get();
-        return null;
+        if(res.isEmpty())
+            throw new NotFoundException();
+        return res.get();
     }
 }
