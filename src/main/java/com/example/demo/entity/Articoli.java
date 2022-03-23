@@ -14,8 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class Articoli {
 
-    @Getter @Setter
-    @NotNull @Id
+    @Getter
+    @Setter
+    @NotNull
+    @Id
     @Column(name = "codart")
     String codart;
     @Getter @Setter
@@ -32,13 +34,13 @@ public class Articoli {
     int pzcart;
     @Getter @Setter
     @Column(name = "pesonetto")
-    int pesonetto;
+    Double pesonetto;
     @Getter @Setter
     @Column(name = "idiva")
     int idiva;
     @Getter @Setter
     @Column(name = "idstatart")
-    char idstatart;
+    String idstatart;
     @Getter @Setter
     @Column(name = "datacreazione") @Temporal(TemporalType.TIMESTAMP)
     Date datacreazione;
