@@ -28,7 +28,8 @@ public class SampleAppController {
     }
 
     @GetMapping(value = "/getArticolo/{codiceArticolo}", produces = "application/json")
-    public void getArticolo(@PathVariable String codiceArticolo){
-        service.getArticolo(codiceArticolo);
+    public Articoli getArticolo(@PathVariable String codiceArticolo){
+        Articoli res = service.getArticolo(codiceArticolo);
+        return res;
     }
 }

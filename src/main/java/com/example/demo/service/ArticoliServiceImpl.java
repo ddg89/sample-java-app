@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 public class ArticoliServiceImpl implements ArticoliService{
@@ -32,7 +34,10 @@ public class ArticoliServiceImpl implements ArticoliService{
     }
 
     @Override
-    public void getArticolo(String codiceArticolo) {
-        repository.findById(codiceArticolo);
+    public Articoli getArticolo(String codiceArticolo) {
+        Optional<Articoli> res = repository.findById(codiceArticolo);
+        if(!res.isEmpty())
+            return res.get();
+        return null;
     }
 }

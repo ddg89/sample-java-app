@@ -7,6 +7,6 @@ public interface ArticoliService {
     void createArticolo(Articoli articolo);
     void deleteArticolo(String codiceArticolo);
     void updateArticolo(Articoli articolo);
-    void getArticolo(String codiceArticolo);
+    Articoli getArticolo(String codiceArticolo);
 
 }
