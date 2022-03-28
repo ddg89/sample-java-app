@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,18 +34,22 @@ public class SampleAppController {
     }
 
     @DeleteMapping(value = "/deleteArticolo/{codiceArticolo}", produces = "application/json")
-    public void deleteArticolo(@PathVariable String codiceArticolo) throws NotFoundException {
+    public ResponseEntity<ResponseMessage> deleteArticolo(@PathVariable String codiceArticolo) throws NotFoundException {
         service.deleteArticolo(codiceArticolo);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage(HttpStatus.OK.toString(), "Articolo eliminato correttamente"), HttpStatus.OK);
     }
 
     @PutMapping(value = "/updateArticolo", produces = "application/json")
-    public void updateArticolo(@RequestBody Articoli articolo) throws NotFoundException {
+    public ResponseEntity<ResponseMessage> updateArticolo(@RequestBody Articoli articolo) throws NotFoundException {
         service.updateArticolo(articolo);
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage(HttpStatus.OK.toString(), "Articolo aggiornato"), header, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/getArticolo/{codiceArticolo}", produces = "application/json")
-    public Articoli getArticolo(@PathVariable String codiceArticolo) throws NotFoundException {
+    public ResponseEntity<Articoli> getArticolo(@PathVariable String codiceArticolo) throws NotFoundException {
         Articoli res = service.getArticolo(codiceArticolo);
-        return res;
+        return new ResponseEntity<Articoli>(res, HttpStatus.OK);
     }
 }
