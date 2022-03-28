@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.attribute.standard.PresentationDirection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,4 +51,12 @@ public class ArticoliServiceImpl implements ArticoliService{
             throw new NotFoundException();
         return res.get();
     }
+
+    @Override
+    public List<Articoli> getAllArticoli() {
+        List<Articoli> list = repository.findAll();
+        return list;
+    }
+
+
 }

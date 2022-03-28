@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/SampleApp")
@@ -46,5 +48,14 @@ public class SampleAppController {
     public Articoli getArticolo(@PathVariable String codiceArticolo) throws NotFoundException {
         Articoli res = service.getArticolo(codiceArticolo);
         return res;
+    }
+
+    @GetMapping(value = "/getAllArticoli", produces = "application/json")
+    public ResponseEntity<List<Articoli>> getAllArticoli(){
+        List<Articoli> articoli = service.getAllArticoli();
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setLastModified(ZonedDateTime.now());
+        return new ResponseEntity<List<Articoli>>(articoli, header, HttpStatus.OK);
     }
 }
