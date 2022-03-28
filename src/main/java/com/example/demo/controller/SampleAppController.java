@@ -5,6 +5,10 @@ import com.example.demo.exception.BindingException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.service.ArticoliService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +22,14 @@ public class SampleAppController {
     ArticoliService service;
 
     @PostMapping(value = "/createArticolo", produces = "application/json")
-    public void createArticolo(@Valid @RequestBody Articoli articolo, BindingResult binding){
+    public ResponseEntity<ResponseMessage> createArticolo(@Valid @RequestBody Articoli articolo, BindingResult binding){
         if (binding.hasErrors())
             throw new BindingException();
         service.createArticolo(articolo);
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage(HttpStatus.OK.toString(), "Articolo creato"), header, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/deleteArticolo/{codiceArticolo}", produces = "application/json")
